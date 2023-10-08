@@ -33,14 +33,23 @@ var map = {'~':0, 'w':0, 's':1, 'm':2, 'd':3};
 	
     function fire(el) {
         if (el.className == 'd' || el.className == 'm') return false;
-        el.className = el.className == 's' ? 'd' : 'm';
-        if (document.querySelectorAll('#p2 .s').length === 0) {
-            alert('You have won!'); 
+		if (el.className == 's'){ 
+			el.className = 'd'; 
+			return false;
+		}
+        el.className = 'm';
+        if (victoryCheck()) {
             return false;
         }
         if (el.className == 'm') return true;
     }
-
+	function victoryCheck(){
+		if (document.querySelectorAll('#p2 .s').length === 0) {
+            alert('You have won!'); 
+            return true;
+        }
+		return false;
+	}
     function backfire() {
         for (let i=w*h;i>0;i--) {
             var targets = document.querySelectorAll('#p1 .s, #p1 .w');
@@ -48,14 +57,37 @@ var map = {'~':0, 'w':0, 's':1, 'm':2, 'd':3};
         }
         if (document.querySelectorAll('#p1 .s').length === 0) alert('You have lost!');
     }
-	QUnit.module('backfire', function(){
-		QUnit.test('one element', function(assert){
-			var el = {'className':'d'};
-			el.className = 'd';
-			assert.equal(backfire(), undefined);
+
+	QUnit.module('tests_victoryCheck', function(){
+		QUnit.test('checkFalse', function(assert){
+			assert.false(victoryCheck());
+		})
+		QUnit.test('checkTrue', function(assert){
+			document.querySelectorAll('#p2 .s').forEach(item=>item.className='d');
+			assert.true(victoryCheck());
+
+			
 		})
 	})
-	
+
+	QUnit.module('tests_fire', function(){
+		QUnit.test('fire_w', function(assert){
+			var el = {'className':'w'};
+			assert.true(fire(el));
+		})
+		QUnit.test('fire_s', function(assert){
+			var el = {'className':'s'};
+			assert.false(fire(el));
+		})
+		QUnit.test('fire_d', function(assert){
+			var el = {'className':'d'};
+			assert.false(fire(el));
+		})
+		QUnit.test('fire_m', function(assert){
+			var el = {'className':'m'};
+			assert.false(fire(el));
+		})
+	})
 })(10, 10);
 
 
