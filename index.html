@@ -6,17 +6,35 @@
 <title>Игра Морской бой</title>
 <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.19.4.css">
 <link href="css/style.css" rel="stylesheet">
-</head>
-
-<body>
-	<div id="p1"></div>
-	<div id="p2"></div>
-	<div id="qunit"></div>
-	<div id="qunit-fixture"></div>
 <script src="https://code.jquery.com/qunit/qunit-2.19.4.js" integrity="sha256-ZFjYNVAOk8Ozw+xXXCfNuf87Knngp3BVxFk3lBLD/Uc=" crossorigin="anonymous"></script>
+<script src="https://rawgit.com/acuminous/yadda/master/dist/yadda-2.2.0.js" />
 <script src="js/functions.mjs" type="module"></script>
 <script src="js/canPlaceShipSpec.js" type="module"></script>
 <script src="js/function.js" type="module"></script>
+<script src="js/yaddaTests.js"></script>
+
+</head>
+
+<body onload="runTests()">
+	<div id="p1"></div>
+	<div id="p2"></div>
+	<div id="qunit"></div>
+	<pre id="scenarios">
+		Scenario: A ship is damaged
+	
+			Given s cell on the field
+			when cell take a fire
+			then there are d cell on the field
+	
+		Scenario: water is damaged
+	
+			Given w cell on the field
+			when cell take a fire
+			then there are m cell on the field
+
+	  </pre
+		>
+	<div id="qunit-fixture"></div>
 
 </body>
 </html>

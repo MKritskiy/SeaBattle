@@ -87,7 +87,9 @@ var map = {'~':0, 'w':0, 's':1, 'm':2, 'd':3};
 			var el = {'className':'m'};
 			assert.false(fire(el));
 		})
-	})
+	});
+
+
 })(10, 10);
 
 
