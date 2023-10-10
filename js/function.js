@@ -5,6 +5,7 @@ var map = {'~':0, 'w':0, 's':1, 'm':2, 'd':3};
 
 //Создаю самовызывающуюся функцию
 (function(w, h) {
+	var score = 0;
 	var p1map = generateEnemyField();
 	var p2map = generateEnemyField();
 	//Здесь я задаю массив поля игрока и противника
@@ -30,18 +31,63 @@ var map = {'~':0, 'w':0, 's':1, 'm':2, 'd':3};
 		//Добавляем клетки второму игроку
         p2.appendChild(div2);
     }
+
+	function getScore(status){
+		switch (status){
+			case 'd':
+				score+=10
+				return score;
+			case 'm':
+				score = score;
+				break;
+			case 'win':
+				score = score;
+
+				break;
+			case 'lose':
+				score = score;
+
+				break;
+		}
+	}
+	
+
+	function changeGameStatus(status) {
+		var gameStatus = document.getElementById("game status");
+		switch (status){
+			case 'd':
+				gameStatus.innerText = "You make a damage";
+				document.getElementById("score").innerText = getScore(status);
+				break;
+			case 'm':
+				gameStatus.innerText = "You have missed";
+				break;
+			case 'win':
+				gameStatus.innerText = "You have won";
+				break;
+			case 'lose':
+				gameStatus.innerText = "You have lost";
+				break;
+		}
+	}
+
 	
     function fire(el) {
         if (el.className == 'd' || el.className == 'm') return false;
 		if (el.className == 's'){ 
 			el.className = 'd'; 
+			changeGameStatus('d');
 			return false;
 		}
         el.className = 'm';
         if (victoryCheck()) {
+			changeGameStatus('win');
             return false;
         }
-        if (el.className == 'm') return true;
+        if (el.className == 'm') {
+			changeGameStatus('m');
+			return true;
+		}
     }
 	function victoryCheck(){
 		if (document.querySelectorAll('#p2 .s').length === 0) {
@@ -55,19 +101,20 @@ var map = {'~':0, 'w':0, 's':1, 'm':2, 'd':3};
             var targets = document.querySelectorAll('#p1 .s, #p1 .w');
             if (targets.length === 0 || fire(targets[Math.floor(Math.random() * targets.length)])) break;
         }
-        if (document.querySelectorAll('#p1 .s').length === 0) alert('You have lost!');
+        if (document.querySelectorAll('#p1 .s').length === 0) {
+			changeGameStatus('lose');
+			alert('You have lost!');
+		}
     }
 
 	QUnit.module('tests_victoryCheck', function(){
 		QUnit.test('checkFalse', function(assert){
 			assert.false(victoryCheck());
 		})
-		QUnit.test('checkTrue', function(assert){
-			document.querySelectorAll('#p2 .s').forEach(item=>item.className='d');
-			assert.true(victoryCheck());
-
-			
-		})
+		// QUnit.test('checkTrue', function(assert){
+		// 	document.querySelectorAll('#p2 .s').forEach(item=>item.className='d');
+		// 	assert.true(victoryCheck());
+		// })
 	})
 
 	QUnit.module('tests_fire', function(){

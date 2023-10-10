@@ -9,3 +9,12 @@ body
 	bottom: 0;
 	top: auto;
 }
+.gameStats{
+	margin: 10px;
+	width: 800px;
+	display: flex;
+	justify-content: space-between;
+}
+.scoreStats{
+	display: flex;
+}
