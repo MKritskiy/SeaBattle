@@ -11,9 +11,10 @@ export function updateFieldVisuals(field){
 с координатами (x;y). isHor является истиной, если корабль установлен горизонтально.
 возвращает true, если корабль можно установить, или false, если корабль нельзя установить*/
 export function canPlaceShip(field, x, y, isHor, size){
+  
 }
 
-/*export function placeShip(field, x, y, isHor, size){
+export function placeShip(field, x, y, isHor, size){
   if(!canPlaceShip(field, x, y, isHor, size)){
     return false;
   }
@@ -88,4 +89,4 @@ export function generateEnemyField(){
     result = false;
   }
   return field;
-}*/
+}

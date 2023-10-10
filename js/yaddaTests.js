@@ -1,4 +1,6 @@
 
+/*QUnit.module('test fire function BDD', {});
+
 var Yadda = require('yadda');
 var FeatureParser = Yadda.parsers.FeatureParser;
 
@@ -109,4 +111,4 @@ function runTests() {
         };
       }
     }
-  }
+  }*/

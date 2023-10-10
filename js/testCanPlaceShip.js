@@ -23,7 +23,7 @@ QUnit.test("should not be able to place horizontal ship that intersects field bo
 });
 QUnit.test("should not be able to place vertical ship that intersects field border", function(assert){
     assert.false(canPlaceShip(field, 1, 8, false, 3));
-});_
+});
 QUnit.test("should not be able do place ship that intersects other ship. test1", function(assert){
     field[0][0] = 1;
     field[0][1] = 1;
