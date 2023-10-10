@@ -10,15 +10,15 @@ var el;
 var library = English.library()
 
   .given('$TYPE cell on the field', function (className) {
-	el = {'className': className};
+	  el = {'className': className};
   })
 
   .when('cell take a fire', function () {
-	fire(el);
+	  fire(el);
   })
 
   .then('there (?:are|are still) $TYPE cell on the field', function (className) {
-	QUnit.assert.equal(className, el.className);
+	  QUnit.assert.equal(className, el.className);
    });
 
 
@@ -96,6 +96,7 @@ function canPlaceShip(field, x, y, isHor, size){
 
 
 function runTests() {
+
     var text = document.getElementById('scenarios').innerText;
     var scenarios = new FeatureParser().parse(text).scenarios;
     for (var i = 0; i < scenarios.length; i++) {
