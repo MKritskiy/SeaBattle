@@ -41,7 +41,7 @@ export function canPlaceShip(field, x, y, isHor, size){
   return true;
 }
 
-/*export function placeShip(field, x, y, isHor, size){
+export function placeShip(field, x, y, isHor, size){
   if(!canPlaceShip(field, x, y, isHor, size)){
     return false;
   }
@@ -116,4 +116,4 @@ export function generateEnemyField(){
     result = false;
   }
   return field;
-}*/
+}
