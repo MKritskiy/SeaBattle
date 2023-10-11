@@ -1,6 +1,3 @@
-
-QUnit.module('test fire function BDD', {});
-
 function canPlaceShip(field, x, y, isHor, size){
   if(!(x >= 0 && x < 10 && y >= 0 && y < 10)){
     return false;
@@ -116,6 +113,41 @@ var library2 = English.library()
 //      QUnit.assert.equal(result, res);
 //     });
 
+function changeGameStatus(status) {
+  var gameStatus = document.getElementById("game status");
+  switch (status) {
+    case 'd':
+      gameStatus.innerText = "You have dealt a damage";
+      break;
+    case 'm':
+      gameStatus.innerText = "You have missed";
+      break;
+    case 'win':
+      gameStatus.innerText = "You have won";
+      end=true;
+      break;
+    case 'lose':
+      gameStatus.innerText = "You have lost";
+      end=true;
+      break;
+  }
+}
+
+var library3 =English.library()
+.given('status text is $TEXT', function (text) {
+  document.getElementById("game status").innerText=text;
+})
+
+.when('when function is called with argument $ARG', function (arg) {
+  changeGameStatus(arg);
+})
+
+.then('status text should be $TEXT', function (text) {
+  QUnit.assert.equal(document.getElementById("game status").innerText, text);
+ });
+
+
+
 function victoryCheck(){
     if (document.querySelectorAll('#p2 .s').length === 0) {
         alert('You have won!'); 
@@ -154,6 +186,7 @@ function runTests() {
       }
     }
     runTests2();
+    runTests3();
   }
 
 function runTests2() {
@@ -167,6 +200,22 @@ function runTests2() {
       function buildTest(scenario) {
         return function () {
           Yadda.createInstance(library2).run(scenario.steps);
+        };
+      }
+    }
+  }
+
+  function runTests3() {
+    var text = document.getElementById('scenarios3').innerText;
+    var scenarios = new FeatureParser().parse(text).scenarios;
+    for (var i = 0; i < scenarios.length; i++) {
+      var scenario = scenarios[i];
+      QUnit.module("test changeGameStatus BDD");
+      QUnit.test(scenario.title, buildTest(scenario));
+  
+      function buildTest(scenario) {
+        return function () {
+          Yadda.createInstance(library3).run(scenario.steps);
         };
       }
     }

@@ -62,7 +62,6 @@ console.log(emptyField);*/
 
 //Создаю самовызывающуюся функцию
 (function (w, h) {
-	var score = 0;
 	var p1map = generateEnemyField();
 	var p2map = generateEnemyField();
 	//Здесь я задаю массив поля игрока и противника
@@ -91,6 +90,7 @@ console.log(emptyField);*/
 		p2.appendChild(div2);
 	}
 
+	var score = 0;
 	var combo=1;
 	function getScore(status) {
 		switch (status) {
@@ -104,6 +104,27 @@ console.log(emptyField);*/
 		}
 		return score;
 	}
+
+	QUnit.module('tests_getScore', function () {
+		QUnit.test('checkCombo', function (assert) {
+			var c=combo
+			getScore('d');
+			assert.true(combo===c+1);
+		})
+		QUnit.test('checkComboDrop', function (assert) {
+			getScore('d');
+			getScore('m');
+			assert.true(combo===1);
+		})
+		QUnit.test('checkScoreCount', function (assert) {
+			var s=score
+			var c=combo
+			assert.true(getScore('d')===s+100*c);
+			score=0;
+			combo=1;
+		})
+
+	})
 
 
 	function changeGameStatus(status) {
@@ -142,7 +163,7 @@ console.log(emptyField);*/
 			return false;
 		}
 		el.className = 'm';
-
+		document.getElementById("score").innerText = getScore('m');
 		if (el.className == 'm') {
 			changeGameStatus('m');
 			return true;

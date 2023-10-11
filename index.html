@@ -59,6 +59,18 @@
 			then there are 4 ship cells on the field
 
 	</pre>
+	<pre id="scenarios3">
+		Scenario: missed to dealt
+			Given status text is You have missed
+			when when function is called with argument d
+			then status text should be You have dealt a damage
+	
+		Scenario: dealt to missed
+			Given status text is You have dealt a damage
+			when when function is called with argument m
+			then status text should be You have missed
+
+	</pre>
 	<div id="qunit-fixture"></div>
 
 </body>
