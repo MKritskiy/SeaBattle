@@ -9,7 +9,7 @@
 <script src="https://code.jquery.com/qunit/qunit-2.19.4.js" integrity="sha256-ZFjYNVAOk8Ozw+xXXCfNuf87Knngp3BVxFk3lBLD/Uc=" crossorigin="anonymous"></script>
 <script src="https://rawgit.com/acuminous/yadda/master/dist/yadda-2.2.0.js" />
 <script src="js/functions.mjs" type="module"></script>
-<script src="js/testCanPlaceShip.js" type="module"></script>
+<script src="js/canPlaceShipSpec.js" type="module"></script>
 <script src="js/function.js" type="module"></script>
 <script src="js/yaddaTests.js"></script>
 
@@ -32,33 +32,15 @@
 	</div>
 	<div id="qunit"></div>
 	<pre id="scenarios">
-		Scenario: A ship is damaged
+		Scenario: The submarine sunks.
 	
-			Given s cell on the field
-			when cell take a fire
-			then there are d cell on the field
-	
-		Scenario: water is damaged
-	
-			Given w cell on the field
-			when cell take a fire
-			then there are m cell on the field
+			Given 1,1 coordinates of the field
+			when all s tiles of the ship is d
+			then a submarine is destroyed
 
-	</pre>
-	<pre id="scenarios2">
-		Scenario: Placing ship with size 1
-	
-			Given empty field
-			when we successfully place ship with size 1
-			then there are 1 ship cells on the field
-	
-		Scenario: Placing ship with size 4
-	
-			Given empty field
-			when we successfully place ship with size 4
-			then there are 4 ship cells on the field
 
-	</pre>
+	  </pre
+		>
 	<div id="qunit-fixture"></div>
 
 </body>

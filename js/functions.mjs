@@ -1,11 +1,11 @@
 export function updateFieldVisuals(field){
-    let map = {0:'sea', 1:'ship', 2:'miss', 3:'shot'};
-    for (let i = 0; i < 10; i++){
-      for (let j = 0; j < 10; j++){
-        document.getElementById(i + '' + j).className = 'grid-item ' + map[field[i][j]];
-      }
+  let map = {0:'sea', 1:'ship', 2:'miss', 3:'shot'};
+  for (let i = 0; i < 10; i++){
+    for (let j = 0; j < 10; j++){
+      document.getElementById(i + '' + j).className = 'grid-item ' + map[field[i][j]];
     }
   }
+}
 
 /*проверка возможности установить корабль размера size в точку на поле field 
 с координатами (x;y). isHor является истиной, если корабль установлен горизонтально.
@@ -38,6 +38,9 @@ export function canPlaceShip(field, x, y, isHor, size){
       }
     }
   }
+
+
+
   return true;
 }
 

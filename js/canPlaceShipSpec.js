@@ -1,5 +1,6 @@
 import { canPlaceShip } from "./functions.mjs";
 var field;
+
 QUnit.module("check canPlaceShip function", {
     beforeEach: ()=>{
             field = [];
@@ -12,18 +13,23 @@ QUnit.module("check canPlaceShip function", {
             }
         }
 });
+
 QUnit.test("should be able to place ship, if everything is ok. test1", function(assert){
     assert.true(canPlaceShip(field, 3, 4, true, 2));
 });
+
 QUnit.test("should be able to place ship, if everything is ok. test2", function(assert){
     assert.true(canPlaceShip(field, 5, 2, false, 3));
 });
+
 QUnit.test("should not be able to place horizontal ship that intersects field border", function(assert){
     assert.false(canPlaceShip(field, 9, 9, true, 3));
 });
+
 QUnit.test("should not be able to place vertical ship that intersects field border", function(assert){
     assert.false(canPlaceShip(field, 1, 8, false, 3));
 });
+
 QUnit.test("should not be able do place ship that intersects other ship. test1", function(assert){
     field[0][0] = 1;
     field[0][1] = 1;
