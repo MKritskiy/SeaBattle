@@ -38,9 +38,6 @@ export function canPlaceShip(field, x, y, isHor, size){
       }
     }
   }
-  
-  
-  
   return true;
 }
 

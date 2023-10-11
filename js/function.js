@@ -4,6 +4,62 @@ var map = { '~': 0, 'w': 0, 's': 1, 'm': 2, 'd': 3 };
 
 var end=false;
 
+function canPlaceShip(field, x, y, isHor, size){
+	if(!(x >= 0 && x < 10 && y >= 0 && y < 10)){
+	  return false;
+	}
+	if(isHor && x + size - 1 > 9){
+	  return false;
+	}
+	if(!isHor && y + size - 1 > 9){
+	  return false;
+	}
+	if(isHor){
+	  for(let k = 0; k < size; k++){
+		for(let i = -1; i <= 1; i++) for(let j = -1; j <= 1; j++){
+		  if(x + i + k >= 0 && x + i + k< 10 && y + j >= 0 && y + j < 10 && field[x + i + k][y + j] != 0){
+			return false;
+		  }
+		}
+	  }
+	}
+	else{
+	  for(let k = 0; k < size; k++){
+		for(let i = -1; i <= 1; i++) for(let j = -1; j <= 1; j++){
+		  if(x + i >= 0 && x + i< 10 && y + j + k >= 0 && y + j + k < 10 && field[x + i][y + j + k] != 0){
+			return false;
+		  }
+		}
+	  }
+	}
+	return true;
+  }
+  
+  function placeShip(field, x, y, isHor, size){
+	if(!canPlaceShip(field, x, y, isHor, size)){
+	  return false;
+	}
+	for(let i = 0; i < size; i++){
+	  if(isHor){
+		field[x+i][y] = 1;
+	  }
+	  else{
+		field[x][y+i] = 1;
+	  }
+	}
+	return true;
+  }
+/*var emptyField = [];
+for (let i = 0; i < 10; i++){
+	let line = [];
+	for (let j = 0; j < 10; j++){
+		line.push(0);
+	}
+	emptyField.push(line);
+}
+placeShip(emptyField, 0, 0, true, 3);
+console.log(emptyField);*/
+
 //Создаю самовызывающуюся функцию
 (function (w, h) {
 	var score = 0;
